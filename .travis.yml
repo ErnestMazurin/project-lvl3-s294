@@ -7,3 +7,9 @@ node_js:
 script:
   - make lint
   - make test
+  - make build
+
+deploy:
+  provider: surge
+  project: ./dist/
+  domain: rssreader-em.surge.sh
