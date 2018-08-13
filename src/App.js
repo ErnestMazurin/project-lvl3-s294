@@ -10,7 +10,7 @@ export default class App {
   }
 
   render() {
-    const jumb = new Jumbotron('Add RSS channel', 'rss here ...');
+    const jumb = new Jumbotron('RSS reader', 'Add new RSS feed URL here ...');
     $(this.element).append(jumb.render());
   }
 }
