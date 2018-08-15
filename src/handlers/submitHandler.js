@@ -1,11 +1,16 @@
 import { updateState } from '../app';
+import xmlGetter from '../util/xmlGetter';
 
 export default (event, state) => {
   event.preventDefault();
-  const { inputValue, channels, isValid } = state;
-  if (!isValid) {
+  const { inputValue, channels, isInputValid } = state;
+  if (!isInputValid) {
     return;
   }
 
-  updateState({ inputValue: '', channels: [...channels, inputValue] });
+  xmlGetter(inputValue)
+    .then(channel => updateState({
+      ...state, inputValue: '', channels: [...channels, channel], isProblem: false,
+    }))
+    .catch(() => updateState({ ...state, inputValue: '', isProblem: true }));
 };

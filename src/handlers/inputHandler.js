@@ -6,7 +6,7 @@ export default (event, state) => {
   event.preventDefault();
   const { value } = event.target;
   const { channels } = state;
-  const isValid = isUrl(value, channels);
+  const isInputValid = isUrl(value, channels);
 
-  updateState({ ...state, inputValue: value, isValid });
+  updateState({ ...state, inputValue: value, isInputValid });
 };
