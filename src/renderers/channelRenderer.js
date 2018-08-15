@@ -1,5 +1,7 @@
 import $ from 'jquery/dist/jquery.min';
 
+import modalRenderer from './modalRenderer';
+
 export default (channel) => {
   const { id } = channel;
 
@@ -27,13 +29,18 @@ export default (channel) => {
 
   const ul = $('<ul/>', { class: 'list-group' }).appendTo(body);
 
-  channel.articles.forEach(({ articleTitle, link, description }) => {
+  channel.articles.forEach(({ articleTitle, link, description }, index) => {
     const li = $('<li/>', { class: 'list-group-item' }).appendTo(ul);
-    const a = $('<a/>', { href: link, class: 'text-dark list-group-item-action' }).appendTo(li);
-    $('<h5/>', { text: articleTitle }).appendTo(a);
-    if (description !== '') {
-      $('<p/>', { class: 'text-muted', text: description }).appendTo(a);
-    }
+    $('<button/>', {
+      type: 'button',
+      class: 'btn text-dark',
+      text: articleTitle,
+      'data-toggle': 'modal',
+      'data-target': `#article-${id}-${index}`,
+    }).appendTo(li);
+
+    const modal = modalRenderer({ articleTitle, link, description }, index, id);
+    modal.appendTo(li);
   });
 
   return card;
