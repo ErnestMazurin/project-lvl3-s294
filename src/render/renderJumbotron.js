@@ -15,7 +15,28 @@ export default () => {
         </div>
       </div>
     </div>
-    <div id="rss-accordion" class="accordion"></div>`;
+
+    <div>
+      <div class="modal fade" id="rss-modal" tabindex="-1" role="dialog" aria-labelledby="rss-modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="rss-modalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="rss-modalBody" class="modal-body"></div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="rss-modalLink" type="button" class="btn btn-primary">See more</button>
+            </div>
+          </div>
+         </div>
+       </div>
+     </div>
+
+     <div id="rss-channels" class="accordion"></ul>`;
 
   return container;
 };

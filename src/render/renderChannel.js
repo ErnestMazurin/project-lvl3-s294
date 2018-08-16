@@ -1,54 +1,40 @@
-const renderLi = ({ articleTitle, link, description }, index, id) => {
+import handleModal from '../handle/handleModal';
+
+const renderLi = ({ articleTitle, link, description }, index) => {
   const li = document.createElement('li');
-  li.className = 'list-group-item';
+  li.classList.add('list-group-item');
+  if (index % 2 !== 0) {
+    li.classList.add('bg-light');
+  }
+
   li.innerHTML = `
-  <button type="button" class="btn text-dark" data-toggle="modal" data-target="#article${id}${index}">
-    ${articleTitle}
-  </button>
+  <div class="d-flex justify-content-between">
+    <div>${articleTitle}</div>
+    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rss-modal">More</button>
+  </div>`;
 
-  <div class="modal fade" id="article${id}${index}" tabindex="-1" role="dialog" aria-labelledby="article${id}${index}Label" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-
-        <div class="modal-header">
-          <h5 class="modal-title" id="article${id}${index}Label">${articleTitle}<h5/>
-          <button type="button" class="close" data-dismiss="modal" aria-label="close">
-            <span aria-hidden="true">&times;</span>
-          <button/>
-        </div>
-
-        <div class="modal-body">${description}</div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" href="${link}">See more</button>
-        </div>
-
-      </div>
-    <div/>`;
-
+  li.querySelector('button').addEventListener('click', handleModal(articleTitle, link, description));
   return li;
 };
 
-export default ({ id, title, articles }) => {
+export default ({ title, articles, id }) => {
   const card = document.createElement('div');
   card.className = 'card';
   card.innerHTML = `
-    <div class="card-header" id="header${id}">
+    <div class="card-header" id="channel-header-${id}">
       <h5 class="mb-0">
-        <button type="button" class="btn btn-link text-body" data-toggle="collapse" data-target="#body${id}" aria-extended="true" aria-controls="body${id}">
+        <button class="btn btn-link collapsed text-dark" type="button" data-toggle="collapse" data-target="#channel-collapse-${id}" aria-expanded="false" aria-controls="channel-collapse-${id}">
           ${title}
         </button>
       </h5>
     </div>
-    <div class="collapse show" id="body${id}" aria-labelledby="header${id}" data-parent="#rss-accordion">
-      <div class="card-body">
+    <div id="channel-collapse-${id}" class="collapse" aria-labelledby="#channel-header-${id}" data-parent="#rss-channels">
+      <div class="card-body p-0">
         <ul class="list-group"></ul>
       </div>
     </div>`;
 
   const ul = card.querySelector('ul');
-  articles.forEach((article, index) => ul.appendChild(renderLi(article, index, id)));
-
+  articles.forEach((article, index) => ul.appendChild(renderLi(article, index)));
   return card;
 };

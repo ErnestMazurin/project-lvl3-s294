@@ -5,5 +5,4 @@ Open the [app](http://rssreader-em.surge.sh/).
 
 ### Build with
 
- - [JQuery](https://jquery.com/) - javascript library
  - [Bootstrap](https://getbootstrap.com/) - html/css framework
