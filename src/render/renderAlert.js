@@ -1,3 +1,6 @@
-import $ from 'jquery';
-
-export default () => $('<div/>', { class: 'alert alert-danger', text: 'Something went wrong' });
+export default () => {
+  const div = document.createElement('div');
+  div.className = 'alert alert-danger';
+  div.textContent = 'Something went wrong';
+  return div;
+};

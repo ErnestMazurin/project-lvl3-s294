@@ -1,6 +1,7 @@
-import $ from 'jquery';
-
-export default () => $('<div/>', { class: 'container' }).html(`
+export default () => {
+  const container = document.createElement('div');
+  container.className = 'container';
+  container.innerHTML = `
     <div class="jumbotron py-1 mt-3">
       <h1 class="display-4">RSS reader</h1>
       <input id="rss-input" class="w-100 form-control is-valid" value="" type="text" placeholder="Add new RSS feed URL here ...">
@@ -14,4 +15,7 @@ export default () => $('<div/>', { class: 'container' }).html(`
         </div>
       </div>
     </div>
-    <div id="rss-accordion" class="accordion"></div>`);
+    <div id="rss-accordion" class="accordion"></div>`;
+
+  return container;
+};

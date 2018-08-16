@@ -1,13 +1,11 @@
-import $ from 'jquery';
-
 export default ({ isInputValid, inputValue }) => {
-  const input = $('#rss-input');
-  input.val(inputValue);
+  const input = document.getElementById('rss-input');
+  input.value = inputValue;
   if (isInputValid) {
-    input.removeClass('is-invalid');
-    input.addClass('is-valid');
+    input.classList.remove('is-invalid');
+    input.classList.add('is-valid');
   } else {
-    input.removeClass('is-valid');
-    input.addClass('is-invalid');
+    input.classList.remove('is-valid');
+    input.classList.add('is-invalid');
   }
 };

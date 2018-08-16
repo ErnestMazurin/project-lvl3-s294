@@ -1,12 +1,11 @@
-import $ from 'jquery';
-
 import renderAlert from '../render/renderAlert';
 
 export default ({ isRequestFailure }) => {
-  const root = $('#rss-alert');
-  root.empty();
+  const root = document.getElementById('rss-alert');
+  root.innerHtml = '';
 
   if (isRequestFailure) {
-    renderAlert().appendTo(root);
+    const alert = renderAlert();
+    root.appendChild(alert);
   }
 };

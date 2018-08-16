@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import WatchJS from 'melanke-watchjs';
 
 import handleInput from './handle/handleInput';
@@ -20,12 +19,16 @@ const state = {
 
 export const updateState = newState => Object.assign(state, newState);
 
-const init = () => $('#root').append(renderJumbotron());
+const init = () => {
+  const root = document.getElementById('root');
+  const jumbotron = renderJumbotron();
+  root.appendChild(jumbotron);
+};
 
 export default () => {
-  $(document).ready(init());
-  $('#rss-input').on('input', event => handleInput(event, state));
-  $('#rss-submit').on('click', event => handleSubmit(event, state));
+  init();
+  document.getElementById('rss-input').addEventListener('input', event => handleInput(event, state));
+  document.getElementById('rss-submit').addEventListener('click', event => handleSubmit(event, state));
 
   const { watch } = WatchJS;
 

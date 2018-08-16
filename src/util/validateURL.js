@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import validator from 'validator';
 
-export default (url, channels) => {
-  const isNotContains = _.findIndex(channels, channel => channel.url === url) < 0;
-  const isURL = validator.isURL(url);
-  return isURL && isNotContains;
+export default (link, channels) => {
+  const isContains = _.find(channels, ({ url }) => url === link);
+  const isURL = validator.isURL(link);
+  return isURL && !isContains;
 };
