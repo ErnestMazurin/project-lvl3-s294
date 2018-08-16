@@ -1,47 +1,47 @@
 import $ from 'jquery/dist/jquery.min';
 
-import modalRenderer from './modalRenderer';
+const renderLi = ({ articleTitle, link, description }, index, id) => $('<li/>', { class: 'list-group-item' }).html(`
+  <button type="button" class="btn text-dark" data-toggle="modal" data-target="#article-${id}-${index}">
+    ${articleTitle}
+  </button>
+
+  <div class="modal fade" id="article-${id}-${index}" tabindex="-1" role="dialog" aria-labelledby="article-${id}-${index}-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="article-${id}-${index}-title">${articleTitle}<h5/>
+          <button type="button" class="close" data-dismiss="modal" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+          <button/>
+        </div>
+        <div class="modal-body">${description}</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" href="${link}">See more</button>
+        </div>
+      </div>
+    <div/>`);
 
 export default (channel) => {
-  const { id } = channel;
+  const { id, title, articles } = channel;
 
-  const card = $('<div/>', { class: 'card' });
-  const cardHeader = $('<div/>', { class: 'card-header', id: `header-${id}` }).appendTo(card);
-  const h5 = $('<h5/>', { class: 'mb-0' }).appendTo(cardHeader);
-  $('<button/>', {
-    text: channel.title,
-    class: 'btn btn-link text-body',
-    type: 'button',
-    'data-toggle': 'collapse',
-    'data-target': `#body-${id}`,
-    'aria-extended': 'true',
-    'aria-controls': `body-${id}`,
-  }).appendTo(h5);
+  const card = $('<div/>', { class: 'card' }).html(`
+    <div class="card-header" id="header-${id}">
+      <h5 class="mb-0">
+        <button type="button" class="btn btn-link text-body" data-toggle="collapse" data-target="#body-${id}" aria-extended="true" aria-controls="body-${id}">
+          ${title}
+        </button>
+      </h5>
+    </div>
+    <div class="collapse show" id="body-${id}" aria-labelledby="header-${id}" data-parent="#rss-accordion">
+      <div class="card-body">
+        <ul class="list-group"></ul>
+      </div>
+    </div>`);
 
-  const collapse = $('<div/>', {
-    id: `body-${id}`,
-    class: 'collapse show',
-    'aria-labelledby': `header-${id}`,
-    'data-parent': '#rss-accordion',
-  }).appendTo(card);
+  const ul = card.find('ul');
 
-  const body = $('<div/>', { class: 'card-body' }).appendTo(collapse);
-
-  const ul = $('<ul/>', { class: 'list-group' }).appendTo(body);
-
-  channel.articles.forEach(({ articleTitle, link, description }, index) => {
-    const li = $('<li/>', { class: 'list-group-item' }).appendTo(ul);
-    $('<button/>', {
-      type: 'button',
-      class: 'btn text-dark',
-      text: articleTitle,
-      'data-toggle': 'modal',
-      'data-target': `#article-${id}-${index}`,
-    }).appendTo(li);
-
-    const modal = modalRenderer({ articleTitle, link, description }, index, id);
-    modal.appendTo(li);
-  });
+  articles.forEach((article, index) => renderLi(article, index, id).appendTo(ul));
 
   return card;
 };
