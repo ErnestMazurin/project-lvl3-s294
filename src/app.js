@@ -1,17 +1,17 @@
-import $ from 'jquery/dist/jquery.min';
+import $ from 'jquery';
 import WatchJS from 'melanke-watchjs';
 
-import inputHandler from './handlers/inputHandler';
-import submitHandler from './handlers/submitHandler';
-import jumbotronRenderer from './renderers/jumbotronRenderer';
-import inputView from './views/inputView';
-import channelsView from './views/channelsView';
-import problemView from './views/problemView';
+import handleInput from './handle/handleInput';
+import handleSubmit from './handle/handleSubmit';
+import renderJumbotron from './render/renderJumbotron';
+import viewInput from './view/viewInput';
+import viewChannels from './view/viewChannels';
+import viewAlert from './view/viewAlert';
 
 const state = {
   inputValue: '',
   isInputValid: false,
-  isProblem: false,
+  isRequestFailure: false,
   channels: [],
 };
 
@@ -20,16 +20,16 @@ const state = {
 
 export const updateState = newState => Object.assign(state, newState);
 
-const init = () => $('#root').append(jumbotronRenderer());
+const init = () => $('#root').append(renderJumbotron());
 
 export default () => {
   $(document).ready(init());
-  $('[data-element="rss-input"]').on('input', event => inputHandler(event, state));
-  $('[data-element="rss-submit"]').on('click', event => submitHandler(event, state));
+  $('#rss-input').on('input', event => handleInput(event, state));
+  $('#rss-submit').on('click', event => handleSubmit(event, state));
 
   const { watch } = WatchJS;
 
-  watch(state, 'inputValue', () => inputView(state));
-  watch(state, 'channels', () => channelsView(state));
-  watch(state, 'isProblem', () => problemView(state));
+  watch(state, 'inputValue', () => viewInput(state));
+  watch(state, 'channels', () => viewChannels(state));
+  watch(state, 'isRequestFailure', () => viewAlert(state));
 };

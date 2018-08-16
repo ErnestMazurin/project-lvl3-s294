@@ -1,5 +1,5 @@
 import { updateState } from '../app';
-import xmlGetter from '../util/xmlGetter';
+import getXML from '../util/getXML';
 
 export default (event, state) => {
   event.preventDefault();
@@ -8,9 +8,9 @@ export default (event, state) => {
     return;
   }
 
-  xmlGetter(inputValue)
+  getXML(inputValue)
     .then(channel => updateState({
-      ...state, inputValue: '', channels: [...channels, channel], isProblem: false,
+      ...state, inputValue: '', channels: [...channels, channel], isRequestFailure: false,
     }))
-    .catch(() => updateState({ ...state, inputValue: '', isProblem: true }));
+    .catch(() => updateState({ ...state, inputValue: '', isRequestFailure: true }));
 };

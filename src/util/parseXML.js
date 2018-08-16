@@ -1,4 +1,3 @@
-
 export default (str) => {
   const parser = new DOMParser();
   const xmlDOM = parser.parseFromString(str, 'application/xml');

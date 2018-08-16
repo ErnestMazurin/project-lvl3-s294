@@ -1,8 +1,7 @@
-import $ from 'jquery/dist/jquery.min';
+import $ from 'jquery';
 
-export default (state) => {
-  const { isInputValid, inputValue } = state;
-  const input = $('[data-element="rss-input"]');
+export default ({ isInputValid, inputValue }) => {
+  const input = $('#rss-input');
   input.val(inputValue);
   if (isInputValid) {
     input.removeClass('is-invalid');

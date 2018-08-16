@@ -1,4 +1,4 @@
-import $ from 'jquery/dist/jquery.min';
+import $ from 'jquery';
 
 const renderLi = ({ articleTitle, link, description }, index, id) => $('<li/>', { class: 'list-group-item' }).html(`
   <button type="button" class="btn text-dark" data-toggle="modal" data-target="#article-${id}-${index}">
@@ -22,9 +22,7 @@ const renderLi = ({ articleTitle, link, description }, index, id) => $('<li/>', 
       </div>
     <div/>`);
 
-export default (channel) => {
-  const { id, title, articles } = channel;
-
+export default ({ id, title, articles }) => {
   const card = $('<div/>', { class: 'card' }).html(`
     <div class="card-header" id="header-${id}">
       <h5 class="mb-0">
