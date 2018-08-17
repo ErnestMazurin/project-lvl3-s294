@@ -7,6 +7,7 @@ export default (event, state) => {
   if (!isInputValid) {
     return;
   }
+
   updateState({ ...state, requestStatus: 'processing' });
 
   getXML(inputValue)

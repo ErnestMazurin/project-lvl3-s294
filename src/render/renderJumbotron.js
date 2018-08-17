@@ -7,11 +7,11 @@ export default () => {
       <input id="rss-input" class="w-100 form-control is-valid" value="" type="text" placeholder="Add new RSS feed URL here ...">
       <hr class="my-2"/>
       <div class="container">
-        <div class="row">
+        <div class="row justify-content-start">
           <div class="col-2 px-0">
-            <a id="rss-submit" class="btn btn-success btn-lg mb-4" href="" role="button">Add</a>
+            <button id="rss-submit" class="btn btn-success btn-lg btn-block mb-4" role="button">Add</button>
           </div>
-          <div id="rss-alert" class="col-10 px-0"></div>
+          <div id="rss-alert" class="col-8"></div>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@ export default () => {
             <div id="rss-modalBody" class="modal-body"></div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button id="rss-modalLink" type="button" class="btn btn-primary">See more</button>
+              <a id="rss-modalLink" href="" class="btn text-dark" type="button" target="_blank" rel="noopener noreferrer">See more</a>
             </div>
           </div>
          </div>
