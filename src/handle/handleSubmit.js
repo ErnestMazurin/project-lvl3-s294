@@ -7,10 +7,11 @@ export default (event, state) => {
   if (!isInputValid) {
     return;
   }
+  updateState({ ...state, requestStatus: 'processing' });
 
   getXML(inputValue)
     .then(channel => updateState({
-      ...state, inputValue: '', channels: [...channels, channel], isRequestFailure: false,
+      ...state, inputValue: '', channels: [...channels, channel], requestStatus: 'success',
     }))
-    .catch(() => updateState({ ...state, inputValue: '', isRequestFailure: true }));
+    .catch(() => updateState({ ...state, inputValue, requestStatus: 'failure' }));
 };

@@ -5,12 +5,12 @@ import handleSubmit from './handle/handleSubmit';
 import renderJumbotron from './render/renderJumbotron';
 import viewInput from './view/viewInput';
 import viewChannels from './view/viewChannels';
-import viewAlert from './view/viewAlert';
+import viewRequestStatus from './view/viewRequestStatus';
 
 const state = {
   inputValue: '',
   isInputValid: false,
-  isRequestFailure: false,
+  requestStatus: '',
   channels: [],
 };
 
@@ -34,5 +34,5 @@ export default () => {
 
   watch(state, 'inputValue', () => viewInput(state));
   watch(state, 'channels', () => viewChannels(state));
-  watch(state, 'isRequestFailure', () => viewAlert(state));
+  watch(state, 'requestStatus', () => viewRequestStatus(state));
 };

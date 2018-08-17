@@ -9,7 +9,7 @@ export default () => {
       <div class="container">
         <div class="row">
           <div class="col-2 px-0">
-            <a id="rss-submit" class="btn btn-success btn-lg" href="" role="button">Add</a>
+            <a id="rss-submit" class="btn btn-success btn-lg mb-4" href="" role="button">Add</a>
           </div>
           <div id="rss-alert" class="col-10 px-0"></div>
         </div>
