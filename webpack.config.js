@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
+  entry: { main: ['whatwg-fetch', './src/index.js'] },
   mode: process.env.NODE_ENV || 'development',
   module: {
     rules: [

@@ -11,7 +11,7 @@ export default () => {
           <div class="col-2 px-0">
             <button id="rss-submit" class="btn btn-success btn-lg btn-block mb-4" role="button">Add</button>
           </div>
-          <div id="rss-alert" class="col-8"></div>
+          <div id="rss-alert" class="col-10 pr-0"></div>
         </div>
       </div>
     </div>

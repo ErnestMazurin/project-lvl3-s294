@@ -25,7 +25,8 @@
     "lodash": "^4.17.10",
     "melanke-watchjs": "^1.4.3",
     "popper.js": "^1.14.4",
-    "validator": "^10.5.0"
+    "validator": "^10.5.0",
+    "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^9.1.1",

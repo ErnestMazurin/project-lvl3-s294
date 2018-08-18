@@ -1,23 +1,4 @@
-import handleModal from '../handle/handleModal';
-
-const renderLi = ({ articleTitle, link, description }, index) => {
-  const li = document.createElement('li');
-  li.classList.add('list-group-item');
-  if (index % 2 !== 0) {
-    li.classList.add('bg-light');
-  }
-
-  li.innerHTML = `
-  <div class="d-flex justify-content-between">
-    <div>${articleTitle}</div>
-    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#rss-modal">More</button>
-  </div>`;
-
-  li.querySelector('button').addEventListener('click', handleModal(articleTitle, link, description));
-  return li;
-};
-
-export default ({ title, articles, id }) => {
+export default ({ title, id }) => {
   const card = document.createElement('div');
   card.className = 'card';
   card.innerHTML = `
@@ -34,7 +15,5 @@ export default ({ title, articles, id }) => {
       </div>
     </div>`;
 
-  const ul = card.querySelector('ul');
-  articles.forEach((article, index) => ul.appendChild(renderLi(article, index)));
   return card;
 };

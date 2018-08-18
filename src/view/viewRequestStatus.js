@@ -36,6 +36,6 @@ export default ({ requestStatus }) => {
       break;
     }
     default:
-      break;
+      throw new Error(`Unknown request status: ${requestStatus}`);
   }
 };

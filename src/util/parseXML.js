@@ -4,7 +4,7 @@ export default (str) => {
   const error = xmlDOM.querySelector('parsererror');
 
   if (error) {
-    return {};
+    throw new Error('XML parse error');
   }
 
   const title = xmlDOM.querySelector('title').textContent;
@@ -14,8 +14,14 @@ export default (str) => {
       const articleTitle = item.querySelector('title').textContent;
       const description = item.querySelector('description') ? item.querySelector('description').textContent : '';
       const link = item.querySelector('link').innerHTML;
-      return { articleTitle, description, link };
+      const pubDate = Date.parse(item.querySelector('pubDate').textContent);
+
+      return {
+        articleTitle, description, link, pubDate,
+      };
     });
+
+  articles.sort((a, b) => b.pubDate - a.pubDate);
 
   return { title, articles };
 };
