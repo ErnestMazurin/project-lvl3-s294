@@ -1,11 +1,11 @@
-export default ({ isInputValid, inputValue }) => {
-  const input = document.getElementById('rss-input');
-  input.value = inputValue;
-  if (isInputValid) {
-    input.classList.remove('is-invalid');
-    input.classList.add('is-valid');
+export default ({ value, isValid }) => {
+  const inputElement = document.getElementById('rss-input');
+  inputElement.value = value;
+  if (isValid) {
+    inputElement.classList.remove('is-invalid');
+    inputElement.classList.add('is-valid');
   } else {
-    input.classList.remove('is-valid');
-    input.classList.add('is-invalid');
+    inputElement.classList.remove('is-valid');
+    inputElement.classList.add('is-invalid');
   }
 };

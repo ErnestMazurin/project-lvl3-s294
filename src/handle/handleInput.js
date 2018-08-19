@@ -1,12 +1,12 @@
-
-import { updateState } from '../app';
+import { getState, updateState } from '../model/state';
 import validateURL from '../util/validateURL';
 
-export default (event, state) => {
+export default (event) => {
   event.preventDefault();
-  const { value } = event.target;
+  const state = getState();
   const { channels } = state;
-  const isInputValid = validateURL(value, channels);
+  const { value } = event.target;
+  const isValid = validateURL(value, channels);
 
-  updateState({ ...state, inputValue: value, isInputValid });
+  updateState({ ...state, input: { value, isValid } });
 };

@@ -2,9 +2,10 @@ import _ from 'lodash';
 
 import getXML from '../util/getXML';
 import setArticlesId from '../util/setArticlesId';
-import { updateState } from '../app';
+import { getState, updateState } from '../model/state';
 
-export default (state) => {
+export default () => {
+  const state = getState();
   const { channels, articles } = state;
   if (channels.length === 0) {
     return;
@@ -21,7 +22,7 @@ export default (state) => {
         if (diff.length !== 0) {
           const articlesWithIds = setArticlesId(diff, channel.id, state);
           updateState({
-            ...state, lastAction: 'update-channel', articles: [...articles, ...articlesWithIds],
+            ...state, articles: [...articles, ...articlesWithIds],
           });
         }
       })

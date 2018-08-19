@@ -10,7 +10,7 @@ const unblockSubmitBtn = () => {
   btn.removeAttribute('disabled');
 };
 
-export default ({ requestStatus }) => {
+export default (requestStatus) => {
   const alertRoot = document.getElementById('rss-alert');
 
   switch (requestStatus) {
