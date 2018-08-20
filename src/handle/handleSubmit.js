@@ -1,11 +1,9 @@
-import { getState, updateState } from '../model/state';
 import getXML from '../util/getXML';
 import setChannelId from '../util/setChannelId';
 import setArticlesId from '../util/setArticlesId';
 
-export default (event) => {
+export default (event, state, updateState) => {
   event.preventDefault();
-  const state = getState();
   const {
     input, channels, articles,
   } = state;

@@ -2,10 +2,8 @@ import _ from 'lodash';
 
 import getXML from '../util/getXML';
 import setArticlesId from '../util/setArticlesId';
-import { getState, updateState } from '../model/state';
 
-export default () => {
-  const state = getState();
+export default (state, updateState) => {
   const { channels, articles } = state;
   if (channels.length === 0) {
     return;

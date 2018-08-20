@@ -1,6 +1,5 @@
 import WatchJS from 'melanke-watchjs';
 
-import { getState } from './model/state';
 import handleInput from './handle/handleInput';
 import handleSubmit from './handle/handleSubmit';
 import handleUpdate from './handle/handleUpdate';
@@ -20,13 +19,21 @@ const init = () => {
 };
 
 export default () => {
+  const state = {
+    input: { value: '', isValid: false },
+    requestStatus: '',
+    channels: [],
+    articles: [],
+  };
+
+  const updateState = newState => Object.assign(state, newState);
+
   init();
-  document.getElementById('rss-input').addEventListener('input', event => handleInput(event));
-  document.getElementById('rss-submit').addEventListener('click', event => handleSubmit(event));
-  setInterval(handleUpdate, 5000);
+  document.getElementById('rss-input').addEventListener('input', event => handleInput(event, state, updateState));
+  document.getElementById('rss-submit').addEventListener('click', event => handleSubmit(event, state, updateState));
+  setInterval(handleUpdate, 5000, state, updateState);
 
   const { watch } = WatchJS;
-  const state = getState();
 
   watch(state, 'input', (prop, action, newInput) => viewInput(newInput));
   watch(state, 'channels', (prop, action, newChannels, oldChannels) => viewNewChannel(newChannels, oldChannels));
