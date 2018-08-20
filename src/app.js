@@ -2,7 +2,6 @@ import WatchJS from 'melanke-watchjs';
 
 import handleInput from './handle/handleInput';
 import handleSubmit from './handle/handleSubmit';
-import handleUpdate from './handle/handleUpdate';
 import renderJumbotron from './render/renderJumbotron';
 import viewInput from './view/viewInput';
 import viewNewChannel from './view/viewNewChannel';
@@ -31,7 +30,6 @@ export default () => {
   init();
   document.getElementById('rss-input').addEventListener('input', event => handleInput(event, state, updateState));
   document.getElementById('rss-submit').addEventListener('click', event => handleSubmit(event, state, updateState));
-  setInterval(handleUpdate, 5000, state, updateState);
 
   const { watch } = WatchJS;
 
